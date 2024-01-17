@@ -23,11 +23,14 @@ about 90%(top 1 accuracy).
 
 ![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/03074ed8-d126-4ad1-8a32-650c22c1cdcb)
 
-The brief demonstration was good enough to pursue further with the ViT model to get its performance on histologic images.
+### Brief Discussion (which will lead to an experimental hypothesis)
 
-Transformers require a tokenization of data as in NLP applications and embedding of these tokens into a high dimensionial feature space so the data with semantically similar meanings tend to gather closely.  This eventually lets it to predict the next word of a given sentence (upon training with a massive amount of text data). 
+The simple demonstration was good enough to warrant more experimental works with the ViT model with anticipating its superior performance on histologic images (without requiring more powerful compute resources).
 
-In computer vision application of transformers, similarily, an image is divided ('tokenized') into a small patches with the size 16x16 or 32x32 and projected('embedded') into a a high dimensional feature space that represents how relevant those patches are for the task the model is trained on, such as image classification so that the closeness in the projected space of patches does not necessarily mean visual similarity in the conventional sense. For example, two patches might be close in the feature space because they share features critical for distinguishing between classes in the dataset.
+Transformers require a tokenization of data as in NLP applications and embedding of these tokens into a high dimensionial feature space so the data with semantically similar meanings tend to gather closely.  <br>
+This eventually lets it to predict the next word of a given sentence (upon training with a massive amount of text data). 
+
+In computer vision application of transformers, similarily, an image is divided ('tokenized') into small patches with the size 16x16 or 32x32 and projected('embedded') into a a high dimensional feature space that represents how relevant those patches are for the task the model is trained on, such as image classification so that the closeness in the projected space of patches does not necessarily mean visual similarity in the conventional sense. For example, two patches might be close in the feature space because they share features critical for distinguishing between classes in the dataset.
 
 In both NLP and computer vision transformers, positional encodings are added to embeddings to provide positional context of each token (word or patch) in the sequence. For images, this means conveying the spatial location of each patch, as the transformer architecture does not inherently capture the order of input.
 
@@ -35,10 +38,9 @@ In summary, word embeddings focus on semantic and syntactic relationships, while
 
 Histologic images are complex and appear similar to the eyes of non-experts.  What distinguishes experts from laymen could be how they selectively choose where to look (focus) and extract anatomical features (compute) from the selected fields.  
 
-CNN based models are designed to be good at computing important local features through their multiscale convolutions so that edges or blobs are playing an important role in understanding the image.  However, they are somewhat limited in preferentially selecting the fields of interest and more importantly interpreting the connections of these important fields to come up with global understanding of the image.
+CNN based models are designed to be good at computing important local features that are pooled through their multiscale convolutions to capture wider context.  Although this architecture mimics the increasing receptive fields, CNNs are inherently emphasizing local interactions between edges or blobs in understanding the image.  Thus, they are believed to be somewhat limited in preferentially selecting the fields of interest and more importantly interpreting the connections of these important fields to come up with a global understanding of the image.
 
-Transformer based models are somewhat different in this sense.  In NLP, self-attention is a mechanism that allows each word in a sentence to consider (or "attend to") all other words in the same sentence.  As in NLP, this mechanism is applied to represent the inter-relation between distant patches in the image and this attribute might be a key to understand how the ViT model works (better than CNN-based models).
-
+Transformer based models appear to be somewhat different to CNN based ones from this perspective.  In NLP, self-attention is a mechanism that allows each word in a sentence to consider all other words in the same sentence. In computer vision tasks, this self-attention mechanism allows a patch to directly interact with every other patch in the image, regardless of their spatial distance. Thus, this ability to learn the inter-relationship between distant patches could be uniquely beneficial to get a big picture in histologic images often highly complicated in their structures (often disrupted in malignant cases) and also mixed with many different types of cells.  
 (will be continued...)
 
 Here are some preliminary results of inference:
