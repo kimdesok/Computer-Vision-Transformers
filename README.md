@@ -4,7 +4,7 @@ Image classification tasks performed with ViT and other transformer based deep l
 ### Overview:
 
 ![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/8a97f8fa-09ac-490d-ac6a-adb5c1846d6b)
-*High-level overview of the Vision Transformer (ViT) architecture* MLP: Multi-Layer Perceptron<br>
+*High-level overview of the Vision Transformer (ViT) architecture* MLP: Multi-Layer Perceptron. Taken from the original paper [1] <br>
 
 The Vision Transformer (ViT) could be understood as a BERT that applied to images. To input images to the model, each image is divided into a sequence of patches (16x16 or 32x32) and linearly embedded. A [CLS] token is added to at the beginning of the sequence to that enables the classifification of images. Then, absolute position embeddings are added to provide this sequence to the Transformer encoder [See the above model diagram][1].
 
@@ -62,8 +62,8 @@ Here are some preliminary results of inference:
 ### References:
 1) An image is worth 16 x 16 images: Transformers for image recognition at scale. https://arxiv.org/pdf/2010.11929.pdf
 2) ### Open source codes:
-To prepare the dataset for training : https://huggingface.co/docs/transformers/tasks/image_classification
-To set up the Keras based training at SageMaker : https://www.philschmid.de/image-classification-huggingface-transformers-keras
-To set up the Keras bsed training process https://github.com/huggingface/notebooks/blob/main/examples/image_classification-tf.ipynb
+To prepare the dataset for training : https://huggingface.co/docs/transformers/tasks/image_classification <br>
+To set up the Keras based training at SageMaker : https://www.philschmid.de/image-classification-huggingface-transformers-keras <br>
+To set up the Keras bsed training process https://github.com/huggingface/notebooks/blob/main/examples/image_classification-tf.ipynb <br>
 
 
