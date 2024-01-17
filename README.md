@@ -4,8 +4,17 @@ Image classification tasks performed with ViT and other transformer based deep l
 ### Overview:
 
 ![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/8a97f8fa-09ac-490d-ac6a-adb5c1846d6b)
+*High-level overview of the Vision Transformer (ViT) architecture* MLP: Multi-Layer Perceptron<br>
 
 The Vision Transformer (ViT) could be understood as a BERT that applied to images. To input images to the model, each image is divided into a sequence of patches (16x16 or 32x32) and linearly embedded. A [CLS] token is added to at the beginning of the sequence to that enables the classifification of images. Then, absolute position embeddings are added to provide this sequence to the Transformer encoder [See the above model diagram][1].
+
+The transformer encoder is the core component of the ViT model. It processes the sequence of image patch embeddings (which include both the linear projections of the flattened patches and their positional embeddings) through multiple layers of self-attention and feed-forward neural networks.  
+
+Multi-Head self-attention is a mechanism that allows the model to focus on different parts of the input sequence (the patch embeddings) simultaneously. It's "multi-head" because this process occurs in parallel for multiple heads, each head potentially focusing on different relationships in the data and learning to pay attention to different parts of the input. This parallel attention mechanism enables the model to capture a richer representation resulting from various types of interactions between patches, such as difference patterns or features of the input data.
+
+While multi-head mechanism refers to the parallel processing parts in the self-attention mechanism, multi-layer perceptron(MLP) is to interpret the complex representations output by the transformer encoder and make a final prediction(.
+
+### Methods and Materials
 
 To investigate the advantages of Transformer based deep learning models for computer vision tasks, a ViT model "google/vit-base-patch16-224-in21k" selected from Huggingface's model repository.  The Python script has been basically adopted from the list of open source codes[2] and is still under development.  The first source code loads a dataset called 'food-101' available at Huggingface's dataset repository. 
 
