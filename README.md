@@ -22,9 +22,13 @@ As a baseline model, a ResNet-50 model, "microsoft/resnet-50",  was used, also a
 
 ### Preliminary Results
 
-Upon fine tuning the pretrained model with the food-101 dataset, it was immediately realized that the ViT model should be superior to a CNN based model such as ResNet-50.  The accuracy and loss data were as below:
+Upon fine tuning the pretrained model with the food-101 dataset, it was immediately realized that the ViT model should be superior to a CNN based model such as ResNet-50.  The accuracy and loss values of the ViT model were as below:
 
 ![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/025afbaf-aba1-486a-bc71-2f1f33a5b2bf)
+
+However, the ResNet-50 model was somewhat overfitted:
+
+![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/2fce41ac-3c59-4079-9729-009fcc2b2f05)
 
 The above results were obtained with the same preprocessing such as data augmentation, converting the data to a tensorflow format, etc.  
 At the moment, each model should be further tuned with adjusting hyperparameters and trying for different optimizers, especially for the ResNet-40 model since the accuracy of the SOTA reached 
