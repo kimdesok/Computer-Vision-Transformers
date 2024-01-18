@@ -26,15 +26,13 @@ Upon fine tuning the pretrained model with the food-101 dataset, it was immediat
 
 ![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/025afbaf-aba1-486a-bc71-2f1f33a5b2bf)
 
-However, the ResNet-50 model was somewhat overfitted:
-
-![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/2fce41ac-3c59-4079-9729-009fcc2b2f05)
-
 The above results were obtained with the same preprocessing such as data augmentation, converting the data to a tensorflow format, etc.  
-At the moment, each model should be further tuned with adjusting hyperparameters and trying for different optimizers, especially for the ResNet-40 model since the accuracy of the SOTA reached 
-about 90%(top 1 accuracy).
+At the moment, each model should be further tuned with adjusting hyperparameters and trying for different optimizers, especially for the ResNet-50 model since it seemed overfitted (The accuracy of the SOTA reached 
+about 90% as top 1 accuracy).
 
 ![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/03074ed8-d126-4ad1-8a32-650c22c1cdcb)
+
+![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/da71264b-de28-43c9-98c2-7296c369a1f0)
 
 ### Brief Discussion (which will lead to an experimental hypothesis)
 
