@@ -36,18 +36,20 @@ about 90% as top 1 accuracy).
 
 ### Brief Discussion (which will lead to an experimental hypothesis)
 
-The simple demonstration was good enough to warrant more experimental works with the ViT model with anticipating its superior performance on histologic images (without requiring more powerful compute resources).
+The simple demonstration was good enough to warrant more experimental works on the ViT model with anticipating its superior performance on histologic images (without requiring more powerful compute resources).
 
-Transformers require a tokenization of data as in NLP applications and embedding of these tokens into a high dimensionial feature space so the data with semantically similar meanings tend to gather closely.  <br>
+At the moment, it seems that the ResNet-50 shows consistently lower accuracy values ranging from 0.5 to 0.7 depending on the hyperparameter settings.  This lower performance could be perhaps due to the inefficient regularization technique or some difference existing between the training set and the evaluation set.
+
+*Transformers* require a tokenization of data as in NLP applications and embedding of these tokens into a high dimensionial feature space so the data with semantically similar meanings tend to gather closely.  <br>
 This eventually lets it to predict the next word of a given sentence (upon training with a massive amount of text data). 
 
-In computer vision application of transformers, similarily, an image is divided ('tokenized') into small patches with the size 16x16 or 32x32 and projected('embedded') into a a high dimensional feature space that represents how relevant those patches are for the task the model is trained on, such as image classification so that the closeness in the projected space of patches does not necessarily mean visual similarity in the conventional sense. For example, two patches might be close in the feature space because they share features critical for distinguishing between classes in the dataset.
+In computer vision application of transformers, similarily, an image is divided ('tokenized') into small patches with the size 16x16 or 32x32 and these patches are projected('embedded') into a high dimensional feature space that represents how relevant those patches are for the task the model is trained on, such as image classification.  For example, two patches might be placed closer in the feature space because they share features critical for distinguishing between classes in the dataset.  Mind that the closeness in the projected space of patches does not necessarily mean visual similarity in the conventional sense. 
 
-In both NLP and computer vision transformers, positional encodings are added to embeddings to provide positional context of each token (word or patch) in the sequence. For images, this means conveying the spatial location of each patch, as the transformer architecture does not inherently capture the order of input.
+In both NLP and computer vision transformers, positional encodings are added to the embeddings to provide positional context of each token (word or patch) in the sequence. For images, this means conveying the spatial location of each patch, as the transformer architecture does not inherently capture the order of input.
 
 In summary, word embeddings focus on semantic and syntactic relationships, while patch projections in vision transformers are more about encoding a wide range of visual features relevant to the task at hand.
 
-Histologic images are complex and appear similar to the eyes of non-experts.  What distinguishes experts from laymen could be how they selectively choose where to look (focus) and extract anatomical features (compute) from the selected fields.  
+*Histologic images* are complex and appear similar to the eyes of non-experts.  What distinguishes experts from laymen could be how they selectively choose where to look (focus) and extract anatomical features (compute) from the selected fields.  
 
 CNN based models are designed to be good at computing important local features that are pooled through their multiscale convolutions to capture wider context.  Although this architecture mimics the increasing receptive fields, CNNs are inherently emphasizing local interactions between edges or blobs in understanding the image.  Thus, they are believed to be somewhat limited in preferentially selecting the fields of interest and more importantly interpreting the connections of these important fields to come up with a global understanding of the image.
 
