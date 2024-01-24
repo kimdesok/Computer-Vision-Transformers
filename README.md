@@ -22,23 +22,24 @@ As a baseline model, a ResNet-50 model, "microsoft/resnet-50",  was used, also a
 
 ### Preliminary Results
 
-Upon fine tuning the pretrained model with the food-101 dataset, it was immediately realized that the ViT model should be superior to a CNN based model such as ResNet-50.  The accuracy and loss values of the ViT model were as below:
-
-![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/025afbaf-aba1-486a-bc71-2f1f33a5b2bf)
+Upon fine tuning the pretrained models with the food-101 dataset, it is becoming obvious that the ViT model should be superior to a CNN based model such as ResNet-50 in a number of benchmark criteria.  The ViT model seemed better in accuracy and loss and converged faster than the Resnet-50: 86.2% vs. 76.7% in accuracy and 15.6 hrs vs. 30.9 hrs taken for the training.  (See the table below, still in preparation):
+									
+![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/0f01c08b-c66d-4a7a-9503-de3d7a05087e)
 
 The above results were obtained with the same preprocessing such as data augmentation, converting the data to a tensorflow format, etc.  
-At the moment, each model should be further tuned with adjusting hyperparameters and trying for different optimizers, especially for the ResNet-50 model since it seemed overfitted (The accuracy of the SOTA reached 
+At the moment, each model should be further tuned with adjusting hyperparameters and trying for different optimizers, especially for the ResNet-50 model since it seemed overfitted (The accuracy of the SOTA ResNet-50 reached 
 about 90% as top 1 accuracy).
 
 ![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/03074ed8-d126-4ad1-8a32-650c22c1cdcb)
 
-![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/da71264b-de28-43c9-98c2-7296c369a1f0)
+![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/c0d4c236-5ee5-4d13-ab6a-1fe19e2df713)
+
 
 ### Brief Discussion (which will lead to an experimental hypothesis)
 
 The simple demonstration was good enough to warrant more experimental works on the ViT model with anticipating its superior performance on histologic images (without requiring more powerful compute resources).
 
-At the moment, it seems that the ResNet-50 shows consistently lower accuracy values ranging from 0.5 to 0.7 depending on the hyperparameter settings.  This lower performance could be perhaps due to the inefficient regularization technique or some difference existing between the training set and the evaluation set.
+At the moment, it seems that the ResNet-50 shows consistently lower accuracy values ranging from 0.7 to 0.8 depending on the hyperparameter settings.  This lower performance could be perhaps due to the inefficient regularization technique or its sensitivity to some difference existing between the training set and the evaluation set(not generalizing well).
 
 *Transformers* require a tokenization of data as in NLP applications and embedding of these tokens into a high dimensionial feature space so the data with semantically similar meanings tend to gather closely.  <br>
 This eventually lets it to predict the next word of a given sentence (upon training with a massive amount of text data). 
