@@ -1,4 +1,5 @@
-# Computer-Vision-Transformers (식단 조절에 응용할 수 있는 인공지능 모델연구 소개임)
+# Computer-Vision-Transformers <br>
+(식단 조절에 도움을 줄 수 있는 컴퓨터 비젼 분야 인공지능 모델 소개임) <br>
 Image classification tasks performed with ViT and other transformer based deep learning models
 
 ### Overview:
