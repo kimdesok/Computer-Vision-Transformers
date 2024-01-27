@@ -32,8 +32,7 @@ about 90% as top 1 accuracy).
 
 ![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/03074ed8-d126-4ad1-8a32-650c22c1cdcb)
 
-![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/c0d4c236-5ee5-4d13-ab6a-1fe19e2df713)
-
+![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/90ff244e-ab9d-474b-b922-8909b1807fa8)
 
 ### Brief Discussion (which will lead to an experimental hypothesis)
 
