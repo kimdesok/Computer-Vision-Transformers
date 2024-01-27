@@ -24,15 +24,16 @@ As a baseline model, a ResNet-50 model, "microsoft/resnet-50",  was used, also a
 
 Upon fine tuning the pretrained models with the food-101 dataset, it is becoming obvious that the ViT model should be superior to a CNN based model such as ResNet-50 in a number of benchmark criteria.  The ViT model seemed better in accuracy and loss and converged faster than the Resnet-50: 86.2% vs. 76.7% in accuracy and 15.6 hrs vs. 30.9 hrs taken for the training.  (See the table below, still in preparation):
 									
-![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/0f01c08b-c66d-4a7a-9503-de3d7a05087e)
+![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/ab5fdbac-0f49-4b10-a6b4-ee42a51b57b6)
 
 The above results were obtained with the same preprocessing such as data augmentation, converting the data to a tensorflow format, etc.  
 At the moment, each model should be further tuned with adjusting hyperparameters and trying for different optimizers, especially for the ResNet-50 model since it seemed overfitted (The accuracy of the SOTA ResNet-50 reached 
 about 90% as top 1 accuracy).
 
-![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/03074ed8-d126-4ad1-8a32-650c22c1cdcb)
+![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/c38bd6bc-28fc-4e20-997e-0dde8019932f)
 
-![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/90ff244e-ab9d-474b-b922-8909b1807fa8)
+![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/8d5d8c66-d369-4ade-96dd-c183d5c73cbc)
+
 
 ### Brief Discussion (which will lead to an experimental hypothesis)
 
@@ -56,12 +57,10 @@ CNN based models are designed to be good at computing important local features t
 Transformer based models appear to be somewhat different to CNN based ones from this perspective.  In NLP, self-attention is a mechanism that allows each word in a sentence to consider all other words in the same sentence. In computer vision tasks, this self-attention mechanism allows a patch to directly interact with every other patch in the image, regardless of their spatial distance. Thus, this ability to learn the inter-relationship between distant patches could be uniquely beneficial to get a big picture in histologic images often highly complicated in their structures (often disrupted in malignant cases) and also mixed with many different types of cells.  
 (will be continued...)
 
-Here are some preliminary results of inference:
+Here are some preliminary results of inference: <br>
+![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/81f7622e-0fc0-413a-8751-064750942445)
 
-![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/4e6f7079-de2d-4c54-abe7-6e16201ce625)
-
-![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/436fe46d-8f8a-4f3d-b4aa-309e7c400a4b)
-
+![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/d2044dde-4632-40dd-94be-2159bdefe1c5)
 
 ### References:
 1) An image is worth 16 x 16 images: Transformers for image recognition at scale. https://arxiv.org/pdf/2010.11929.pdf
