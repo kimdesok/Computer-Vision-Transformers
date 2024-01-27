@@ -1,5 +1,5 @@
 # Computer-Vision-Transformers <br>
-(사진 속 음식 이름을 추측하는 인공지능 모델 소개임. 음식 종류가 판단되면 양, 영양분 등을 계산하는 알고리즘(또는 인공지능 모델)에 의해 사용자의 식단 조절을 도와줄 수 있다고 함.) <br>)
+사진 속 음식 이름을 추측하는 인공지능 모델 소개임. 음식 종류가 판단되면 양, 영양분 등을 계산하는 알고리즘(또는 인공지능 모델)에 의해 사용자의 식단 조절을 도와줄 수 있다고 함. <br>
 Image classification tasks performed with ViT and other transformer based deep learning models
 
 ### Overview:
