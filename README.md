@@ -1,10 +1,11 @@
-# Computer-Vision-Transformers
+# Computer-Vision-Transformers (식단 조절에 응용할 수 있는 인공지능 모델연구 소개임)
 Image classification tasks performed with ViT and other transformer based deep learning models
 
 ### Overview:
 
 ![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/8a97f8fa-09ac-490d-ac6a-adb5c1846d6b)
 *High-level overview of the Vision Transformer (ViT) architecture* MLP: Multi-Layer Perceptron. Taken from the original paper [1] <br>
+*인공지능 모델 설계도*
 
 The Vision Transformer (ViT) could be understood as a BERT that applied to images. To input images to the model, each image is divided into a sequence of patches (16x16 or 32x32) and linearly embedded. A [CLS] token is added to at the beginning of the sequence to that enables the classifification of images. Then, absolute position embeddings are added to provide this sequence to the Transformer encoder [See the above model diagram][1].
 
@@ -23,7 +24,8 @@ As a baseline model, a ResNet-50 model, "microsoft/resnet-50",  was used, also a
 ### Preliminary Results
 
 Upon fine tuning the pretrained models with the food-101 dataset, it is becoming obvious that the ViT model should be superior to a CNN based model such as ResNet-50 in a number of benchmark criteria.  The ViT model seemed better in accuracy and loss and converged faster than the Resnet-50: 86.2% vs. 76.7% in accuracy and 15.6 hrs vs. 30.9 hrs taken for the training.  (See the table below, still in preparation):
-									
+
+현재 개발 중인 인공지능 모델의 성능 : 모델별로 85% 또는 75% 정도 정확하게 사진 속 음식을 판단할 수 있음.  해외 연구진으
 ![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/ab5fdbac-0f49-4b10-a6b4-ee42a51b57b6)
 
 The above results were obtained with the same preprocessing such as data augmentation, converting the data to a tensorflow format, etc.  
