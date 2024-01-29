@@ -1,4 +1,16 @@
-# Computer-Vision-Transformers <br>
+# Transformers based Whole Slide Image(WSI) Classification <br>
+### Introduction of a proposed project
+
+![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/71b9a546-fc3d-43d2-b422-c010d4c2abaa)
+
+*  In a previous study, a transformer-based ViT model showed 86% accuracy when training on the Food-101 dataset. In contrast, the ResNet-50 model was only 77% accurate (See below: Pilot project using Hugging face libraries and Food-101 dataset).
+*  Among the transformer-based models that can be utilized for high-resolution cancer tissue WSI analysis, ViT, DeiT, Swin, PVT, CrossViT, and T2T-ViT are suitable for the purpose of cancer tissue image classification and are expected to have significantly higher accuracy compared to ResNet-50.
+*  It is believed that CNN-based model is sensitive to local features, while the transformer-based vision model utilizes the self attention mechanism to effectively represent relatively extensive image information (local and global features).  Thus, The histological features of the two models marked by the heatmap are expected to be different.
+* Clinical information extracted or summarized through text analysis techniques of natural language processing is considered an important application of large-scale language models, as it plays a significant role in interpreting/discussing model inference results and supporting the training of pathologists.
+* Quantitative morphometric analysis of tissue images highlighted in the heatmap can be performed to statistically analyze the association with clinical information (cancer cell nuclear morphology, tissue boundaries of cancer cells, lymphocyte infiltration, microvasculature, presence of necrotic or apoptotic cells, etc).
+* We propose a development strategy aimed at more creative applications, such as designing architectures that can overcome the limitations of the low computational resources while at the same time improving the accuracy of inference models and utilizing large language models for interpretation of inference results.
+
+### Pilot Project using Hugging face libraries and Food-101 dataset
 사진 속 음식 이름을 추측하는 인공지능 모델 소개임. 음식 종류가 판단되면 양, 영양분 등을 계산하는 알고리즘(또는 인공지능 모델)에 의해 사용자의 식단 조절을 도와줄 수 있다고 함. <br>
 Image classification tasks performed with ViT and other transformer based deep learning models
 
