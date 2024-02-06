@@ -1,5 +1,5 @@
 # Transformers based Whole Slide Image(WSI) Classification <br>
-### Introduction of a proposed project
+## Introduction of a proposed project
 
 ![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/71b9a546-fc3d-43d2-b422-c010d4c2abaa)
 
@@ -10,11 +10,7 @@
 * Quantitative morphometric analysis of tissue images highlighted in the heatmap can be performed to statistically analyze the association with clinical information (cancer cell nuclear morphology, tissue boundaries of cancer cells, lymphocyte infiltration, microvasculature, presence of necrotic or apoptotic cells, etc).
 * We propose a development strategy aimed at more creative applications, such as designing architectures that can overcome the limitations of the low computational resources while at the same time improving the accuracy of inference models and utilizing large language models for interpretation of inference results.
 
-### Pilot Project using Hugging face libraries and Food-101 dataset
-사진 속 음식 이름을 추측하는 인공지능 모델 소개임. 음식 종류가 판단되면 양, 영양분 등을 계산하는 알고리즘(또는 인공지능 모델)에 의해 사용자의 식단 조절을 도와줄 수 있다고 함. <br>
-Image classification tasks performed with ViT and other transformer based deep learning models
-
-### Overview:
+## Overview:
 
 ![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/8a97f8fa-09ac-490d-ac6a-adb5c1846d6b)
 *High-level overview of the Vision Transformer (ViT) architecture* MLP: Multi-Layer Perceptron. Taken from the original paper [1] <br>
@@ -27,27 +23,6 @@ The transformer encoder is the core component of the ViT model. It processes the
 Multi-Head self-attention is a mechanism that allows the model to focus on different parts of the input sequence (the patch embeddings) simultaneously. It's "multi-head" because this process occurs in parallel for multiple heads, each head potentially focusing on different relationships in the data and learning to pay attention to different parts of the input. This parallel attention mechanism enables the model to capture a richer representation resulting from various types of interactions between patches, such as difference patterns or features of the input data.
 
 While multi-head mechanism refers to the parallel processing parts in the self-attention mechanism, multi-layer perceptron(MLP) is to interpret the complex representations output by the transformer encoder and make a final prediction(.
-
-### Methods and Materials
-
-To investigate the advantages of Transformer based deep learning models for computer vision tasks, a ViT model "google/vit-base-patch16-224-in21k" selected from Huggingface's model repository.  The Python script has been basically adopted from the list of open source codes[2] and is still under development.  The first source code loads a dataset called 'food-101' available at Huggingface's dataset repository. 
-
-As a baseline model, a ResNet-50 model, "microsoft/resnet-50",  was used, also available at Huggingface's model repository.  
-
-### Preliminary Results
-
-Upon fine tuning the pretrained models with the food-101 dataset, it is becoming obvious that the ViT model should be superior to a CNN based model such as ResNet-50 in a number of benchmark criteria.  The ViT model seemed better in accuracy and loss and converged faster than the Resnet-50: 86.2% vs. 76.7% in accuracy and 15.6 hrs vs. 30.9 hrs taken for the training.  (See the table below, still in preparation):
-
-현재 개발 중인 인공지능 모델의 성능 : 모델에 따라 약 85% 또는 75% 정도 정확하게 사진 속 음식의 종류 즉 메뉴를 판단할 수 있음.  해외 연구진은 약 90% 이상 정확한 모델을 개발했다고 함.
-![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/ab5fdbac-0f49-4b10-a6b4-ee42a51b57b6)
-
-The above results were obtained with the same preprocessing such as data augmentation, converting the data to a tensorflow format, etc.  
-At the moment, each model should be further tuned with adjusting hyperparameters and trying for different optimizers, especially for the ResNet-50 model since it seemed overfitted (The accuracy of the SOTA ResNet-50 reached about 90% as top 1 accuracy).
-
-![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/c38bd6bc-28fc-4e20-997e-0dde8019932f)
-
-![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/8d5d8c66-d369-4ade-96dd-c183d5c73cbc)
-
 
 ### Brief Discussion (which will lead to an experimental hypothesis)
 
@@ -71,10 +46,45 @@ CNN based models are designed to be good at computing important local features t
 Transformer based models appear to be somewhat different to CNN based ones from this perspective.  In NLP, self-attention is a mechanism that allows each word in a sentence to consider all other words in the same sentence. In computer vision tasks, this self-attention mechanism allows a patch to directly interact with every other patch in the image, regardless of their spatial distance. Thus, this ability to learn the inter-relationship between distant patches could be uniquely beneficial to get a big picture in histologic images often highly complicated in their structures (often disrupted in malignant cases) and also mixed with many different types of cells.  
 (will be continued...)
 
+## Pilot Project 1 : Image classification tasks performed with ViT and other transformer based deep learning models using the Food-101 dataset
+사진 속 음식 이름을 추측하는 인공지능 모델 소개임. 음식 종류가 판단되면 양, 영양분 등을 계산하는 알고리즘(또는 인공지능 모델)에 의해 사용자의 식단 조절을 도와줄 수 있다고 함. <br>
+
+### Methods and Materials
+
+To investigate the advantages of Transformer based deep learning models for computer vision tasks, a ViT model "google/vit-base-patch16-224-in21k" selected from Huggingface's model repository.  The Python script has been basically adopted from the list of open source codes[2] and is still under development.  The first source code loads a dataset called 'food-101' available at Huggingface's dataset repository. 
+
+As a baseline model, a ResNet-50 model, "microsoft/resnet-50",  was used, also available at Huggingface's model repository.  
+
+### Preliminary Results
+
+Upon fine tuning the pretrained models with the food-101 dataset, it is becoming obvious that the ViT model should be superior to a CNN based model such as ResNet-50 in a number of benchmark criteria.  The ViT model seemed better in accuracy and loss and converged faster than the Resnet-50: 86.2% vs. 76.7% in accuracy and 15.6 hrs vs. 30.9 hrs taken for the training.  (See the table below, still in preparation):
+
+현재 개발 중인 인공지능 모델의 성능 : 모델에 따라 약 85% 또는 75% 정도 정확하게 사진 속 음식의 종류 즉 메뉴를 판단할 수 있음.  해외 연구진은 약 90% 이상 정확한 모델을 개발했다고 함.
+![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/ab5fdbac-0f49-4b10-a6b4-ee42a51b57b6)
+
+The above results were obtained with the same preprocessing such as data augmentation, converting the data to a tensorflow format, etc.  
+At the moment, each model should be further tuned with adjusting hyperparameters and trying for different optimizers, especially for the ResNet-50 model since it seemed overfitted (The accuracy of the SOTA ResNet-50 reached about 90% as top 1 accuracy).
+
+![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/c38bd6bc-28fc-4e20-997e-0dde8019932f)
+
+![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/8d5d8c66-d369-4ade-96dd-c183d5c73cbc)
+
 Here are some preliminary results of inference: <br>
 ![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/81f7622e-0fc0-413a-8751-064750942445)
 
 ![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/d2044dde-4632-40dd-94be-2159bdefe1c5)
+
+## Pilot Project 2 : Classification of breast cancer histologic images 
+
+As a baseline model, a ResNet-50 model, "microsoft/resnet-50",  was used in the same manner of the pilot project #1.  
+
+### Preliminary Results
+											
+![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/e647ef8c-9305-452c-8dcf-76eeb32b04f0)
+
+![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/0284de3f-a6df-44be-9782-8ae7ef6793d5)
+
+
 
 ### 논문명과 참조한 오픈 소스 코드 References:
 1) An image is worth 16 x 16 images: Transformers for image recognition at scale. https://arxiv.org/pdf/2010.11929.pdf
