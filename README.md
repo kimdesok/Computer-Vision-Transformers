@@ -57,7 +57,7 @@ As a baseline model, a ResNet-50 model, "microsoft/resnet-50",  was used, also a
 
 ### Preliminary Results
 
-Upon fine tuning the pretrained models with the food-101 dataset, it is becoming obvious that the ViT model should be superior to a CNN based model such as ResNet-50 in a number of benchmark criteria.  The ViT model seemed better in accuracy and loss and converged faster than the Resnet-50: 86.2% vs. 76.7% in accuracy and 15.6 hrs vs. 30.9 hrs taken for the training.  (See the table below, still in preparation):
+Upon fine tuning the pretrained models with the food-101 dataset, it showed that the ViT model should be superior to a CNN based model such as ResNet-50.  The ViT model seemed better in accuracy and loss and converged faster than the Resnet-50: 86.2% vs. 76.7% in accuracy and 15.6 hrs vs. 30.9 hrs taken for the training.  (See the table below):
 
 현재 개발 중인 인공지능 모델의 성능 : 모델에 따라 약 85% 또는 75% 정도 정확하게 사진 속 음식의 종류 즉 메뉴를 판단할 수 있음.  해외 연구진은 약 90% 이상 정확한 모델을 개발했다고 함.
 ![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/ab5fdbac-0f49-4b10-a6b4-ee42a51b57b6)
@@ -79,11 +79,12 @@ Here are some preliminary results of inference: <br>
 As a baseline model, a ResNet-50 model, "microsoft/resnet-50",  was used in the same manner of the pilot project #1.  
 
 ### Preliminary Results
+
+Upon fine tuning the pretrained models with the PcharmCamelyon dataset, it is becoming obvious that the ViT model is superior to a ResNet-50 in a number of benchmark criteria.  The ViT model was better in accuracy and loss and converged faster, too, than the Resnet-50: 90.0% vs. 80.5% in accuracy and 1.1 hrs vs. 1.3 hrs taken for the training.  (See the table below, still in preparation):
 											
 ![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/e647ef8c-9305-452c-8dcf-76eeb32b04f0)
 
-![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/0284de3f-a6df-44be-9782-8ae7ef6793d5)
-
+![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/c44dcc69-e3de-427a-a1fb-d23faae2d9ca)
 
 
 ### 논문명과 참조한 오픈 소스 코드 References:
