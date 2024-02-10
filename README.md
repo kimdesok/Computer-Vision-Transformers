@@ -14,7 +14,6 @@
 
 ![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/8a97f8fa-09ac-490d-ac6a-adb5c1846d6b)
 *High-level overview of the Vision Transformer (ViT) architecture* MLP: Multi-Layer Perceptron. Taken from the original paper [1] <br>
-*인공지능 모델 설계도 [논문 1에서 발췌]*
 
 The Vision Transformer (ViT) could be understood as a BERT that applied to images. To input images to the model, each image is divided into a sequence of patches (16x16 or 32x32) and linearly embedded. A [CLS] token is added to at the beginning of the sequence to that enables the classifification of images. Then, absolute position embeddings are added to provide this sequence to the Transformer encoder [See the above model diagram][1].
 
@@ -47,7 +46,7 @@ Transformer based models appear to be somewhat different to CNN based ones from 
 (will be continued...)
 
 ## Pilot Project 1 : Image classification tasks performed with ViT and other transformer based deep learning models using the Food-101 dataset
-사진 속 음식 이름을 추측하는 인공지능 모델 소개임. 음식 종류가 판단되면 양, 영양분 등을 계산하는 알고리즘(또는 인공지능 모델)에 의해 사용자의 식단 조절을 도와줄 수 있다고 함. <br>
+<br>
 
 ### Methods and Materials
 
@@ -59,7 +58,6 @@ As a baseline model, a ResNet-50 model, "microsoft/resnet-50",  was used, also a
 
 Upon fine tuning the pretrained models with the food-101 dataset, it showed that the ViT model should be superior to a CNN based model such as ResNet-50.  The ViT model seemed better in accuracy and loss and converged faster than the Resnet-50: 86.2% vs. 76.7% in accuracy and 15.6 hrs vs. 30.9 hrs taken for the training.  (See the table below):
 
-현재 개발 중인 인공지능 모델의 성능 : 모델에 따라 약 85% 또는 75% 정도 정확하게 사진 속 음식의 종류 즉 메뉴를 판단할 수 있음.  해외 연구진은 약 90% 이상 정확한 모델을 개발했다고 함.
 ![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/ab5fdbac-0f49-4b10-a6b4-ee42a51b57b6)
 
 The above results were obtained with the same preprocessing such as data augmentation, converting the data to a tensorflow format, etc.  
@@ -87,7 +85,7 @@ Upon fine tuning the pretrained models with the PcharmCamelyon dataset, it is be
 ![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/c44dcc69-e3de-427a-a1fb-d23faae2d9ca)
 
 
-### 논문명과 참조한 오픈 소스 코드 References:
+### References:
 1) An image is worth 16 x 16 images: Transformers for image recognition at scale. https://arxiv.org/pdf/2010.11929.pdf
 2) ### Open source codes:
 To prepare the dataset for training : https://huggingface.co/docs/transformers/tasks/image_classification <br>
