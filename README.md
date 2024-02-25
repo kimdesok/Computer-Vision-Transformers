@@ -78,9 +78,10 @@ As a baseline model, a ResNet-50 model, "microsoft/resnet-50",  was used in the 
 
 ### Preliminary Results
 
-Upon fine tuning the pretrained models with the PcharmCamelyon dataset, it is becoming obvious that the ViT model is superior to a ResNet-50 in a number of benchmark criteria.  The ViT model was better in accuracy and loss and converged faster, too, than the Resnet-50: 90.0% vs. 80.5% in accuracy and 1.1 hrs vs. 1.3 hrs taken for the training.  (See the table below, still in preparation):
+Upon fine tuning the pretrained models with the PcharmCamelyon dataset, it appears that the ViT model performs slightly better than in a number of benchmark criteria such as batch size as large as 64 or larger.  However ResNet 50 resulted in more accurate inference when batch size was 32 (See the table below).  Due to the time limitation, the training was performed only within five epochs. At this point, it seems that transformer models do not seem to perform always better than ResNet 50 models but its performance could be dependent on the dataset.
 											
-![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/e647ef8c-9305-452c-8dcf-76eeb32b04f0)
+Performance of Image Classsification Models fine tuned with PatchCamelyon dataset (breast cancer histology, n=327,680[262,144/32,768] vs. 32,768) 											
+![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/7e9b5fa2-c3f0-435e-ad15-b9ad8dc658b5)
 
 ![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/c44dcc69-e3de-427a-a1fb-d23faae2d9ca)
 
