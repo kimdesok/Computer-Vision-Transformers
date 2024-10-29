@@ -45,7 +45,7 @@ CNN based models are designed to be good at computing important local features t
 Transformer based models appear to be somewhat different to CNN based ones from this perspective.  In NLP, self-attention is a mechanism that allows each word in a sentence to consider all other words in the same sentence. In computer vision tasks, this self-attention mechanism allows a patch to directly interact with every other patch in the image, regardless of their spatial distance. Thus, this ability to learn the inter-relationship between distant patches could be uniquely beneficial to get a big picture in histologic images often highly complicated in their structures (often disrupted in malignant cases) and also mixed with many different types of cells.  
 (will be continued...)
 
-## Pilot Project 1 : Image classification tasks performed with ViT and other transformer based deep learning models using the Food-101 dataset
+## Pilot Project 1 : Food Image classification with Vision Transformers
 <br>
 
 ### Methods and Materials
@@ -72,15 +72,16 @@ Here are some preliminary results of inference: <br>
 
 ![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/d2044dde-4632-40dd-94be-2159bdefe1c5)
 
-## Pilot Project 2 : Classification of breast cancer histologic images 
+## Pilot Project 2 : Classification of Breast Cancer Histologic Images using Vision Transformers
 
-As a baseline model, a ResNet-50 model, "microsoft/resnet-50",  was used in the same manner of the pilot project #1.  
+As a baseline model, a ResNet-50 model, "microsoft/resnet-50",  was used in the same manner of the pilot project #1. 
+Histologic image datasets were available at Huggingface's Datasets titled as ['laurent/PatchCamelyon'](https://huggingface.co/datasets/1aurent/PatchCamelyon) 
 
 ### Preliminary Results
 
-Upon fine tuning the pretrained models with the PcharmCamelyon dataset, it appears that the ViT model performs slightly better than in a number of benchmark criteria such as batch size as large as 64 or larger.  However ResNet 50 resulted in more accurate inference when batch size was 32 (See the table below).  Due to the time limitation, the training was performed only within five epochs. At this point, it seems that transformer models do not seem to perform always better than ResNet 50 models but its performance could be dependent on the dataset.
+Upon fine tuning the pretrained models with the PatchCamelyon dataset, it appears that the ViT model performs slightly better than in a number of benchmark criteria such as batch size as large as 64 or larger.  However ResNet 50 resulted in more accurate inference when batch size was 32 (See the table below).  Due to the time limitation, the training was performed only within five epochs. At this point, it seems that transformer models do not seem to perform always better than ResNet 50 models but its performance could be dependent on the dataset.
 											
-Performance of Image Classsification Models fine tuned with PatchCamelyon dataset (breast cancer histology, n=327,680[262,144/32,768] vs. 32,768) 											
+Performance of Image Classsification Models fine tuned with PatchCamelyon dataset (breast cancer histology) 											
 ![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/7e9b5fa2-c3f0-435e-ad15-b9ad8dc658b5)
 
 ![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/c44dcc69-e3de-427a-a1fb-d23faae2d9ca)
