@@ -87,7 +87,8 @@ Upon fine tuning the pretrained models with the PatchCamelyon dataset, it appear
 Performance of Image Classsification Models											
 ![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/7e9b5fa2-c3f0-435e-ad15-b9ad8dc658b5)
 
-Inference examples
+[Inference examples](https://proxy.govai.ktcloud.com:10819/proxy/8890/)
+
 If the test image was incorrectly predicted, the index was highlighted in red.
 ![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/c44dcc69-e3de-427a-a1fb-d23faae2d9ca)
 
