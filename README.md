@@ -45,7 +45,29 @@ CNN based models are designed to be good at computing important local features t
 Transformer based models appear to be somewhat different to CNN based ones from this perspective.  In NLP, self-attention is a mechanism that allows each word in a sentence to consider all other words in the same sentence. In computer vision tasks, this self-attention mechanism allows a patch to directly interact with every other patch in the image, regardless of their spatial distance. Thus, this ability to learn the inter-relationship between distant patches could be uniquely beneficial to get a big picture in histologic images often highly complicated in their structures (often disrupted in malignant cases) and also mixed with many different types of cells.  
 (will be continued...)
 
-## Pilot Project 1 : Food Image classification with Vision Transformers
+## Pilot Project 1 : Classification of Breast Cancer Histologic Images using Vision Transformers
+
+As a baseline model, a ResNet-50 model, "microsoft/resnet-50",  was used in the same manner of the pilot project #1. 
+Histologic image datasets were available at Huggingface's Datasets titled as ['laurent/PatchCamelyon'](https://huggingface.co/datasets/1aurent/PatchCamelyon) It consists of 327,680 RGB color images with the size of 96x96 depicting the lymph node sections of locally metastasized breast cancers. Patch images were labeled as positive if the metastatic cells were found in the 32x32 square located in the center of the patch(See the figure below. The positive patch was highlighted in cyan in the center square).  Otherwise, they were labeled as negative.
+
+PatchCamelyon images
+![Image](https://github.com/basveeling/pcam/raw/master/pcam.jpg)
+
+### Preliminary Results
+
+Upon fine tuning the pretrained models with the PatchCamelyon dataset, it appears that the ViT model performs slightly better than in a number of benchmark criteria such as batch size as large as 64 or larger.  However ResNet 50 resulted in more accurate inference when batch size was 32 (See the table below).  Due to the time limitation, the training was performed only within five epochs. At this point, it seems that transformer models do not seem to perform always better than ResNet 50 models but its performance could be dependent on the dataset.
+											
+Performance of Image Classsification Models											
+![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/7e9b5fa2-c3f0-435e-ad15-b9ad8dc658b5)
+
+[Inference examples](https://d6dd-211-253-164-16.ngrok-free.app/)
+- The above link is provided for the illustration purpose only.
+- This version may be slightly different to the one introduced in this section.
+
+If the test image was incorrectly predicted, the index was highlighted in red.
+![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/c44dcc69-e3de-427a-a1fb-d23faae2d9ca)
+
+## Pilot Project 2 : Food Image classification with Vision Transformers
 <br>
 
 ### Methods and Materials
@@ -71,28 +93,6 @@ Here are some preliminary results of inference: <br>
 ![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/81f7622e-0fc0-413a-8751-064750942445)
 
 ![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/d2044dde-4632-40dd-94be-2159bdefe1c5)
-
-## Pilot Project 2 : Classification of Breast Cancer Histologic Images using Vision Transformers
-
-As a baseline model, a ResNet-50 model, "microsoft/resnet-50",  was used in the same manner of the pilot project #1. 
-Histologic image datasets were available at Huggingface's Datasets titled as ['laurent/PatchCamelyon'](https://huggingface.co/datasets/1aurent/PatchCamelyon) It consists of 327,680 RGB color images with the size of 96x96 depicting the lymph node sections of locally metastasized breast cancers. Patch images were labeled as positive if the metastatic cells were found in the 32x32 square located in the center of the patch(See the figure below. The positive patch was highlighted in cyan in the center square).  Otherwise, they were labeled as negative.
-
-PatchCamerlyon images
-![Image](https://github.com/basveeling/pcam/raw/master/pcam.jpg)
-
-### Preliminary Results
-
-Upon fine tuning the pretrained models with the PatchCamelyon dataset, it appears that the ViT model performs slightly better than in a number of benchmark criteria such as batch size as large as 64 or larger.  However ResNet 50 resulted in more accurate inference when batch size was 32 (See the table below).  Due to the time limitation, the training was performed only within five epochs. At this point, it seems that transformer models do not seem to perform always better than ResNet 50 models but its performance could be dependent on the dataset.
-											
-Performance of Image Classsification Models											
-![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/7e9b5fa2-c3f0-435e-ad15-b9ad8dc658b5)
-
-[Inference examples](https://proxy.govai.ktcloud.com:10819/proxy/8890/)
-
-If the test image was incorrectly predicted, the index was highlighted in red.
-![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/c44dcc69-e3de-427a-a1fb-d23faae2d9ca)
-
-
 ### References:
 1) An image is worth 16 x 16 images: Transformers for image recognition at scale. https://arxiv.org/pdf/2010.11929.pdf
 2) ### Open source codes:
