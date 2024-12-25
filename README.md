@@ -61,12 +61,15 @@ Upon fine tuning the pretrained models with the PatchCamelyon dataset, it appear
 Performance of Image Classsification Models											
 ![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/7e9b5fa2-c3f0-435e-ad15-b9ad8dc658b5)
 
-[Inference examples](https://d6dd-211-253-164-16.ngrok-free.app/)
-- The above link is provided for the illustration purpose only.
-- This version may be slightly different to the one introduced in this section.
-
-If the test image was incorrectly predicted, the index was highlighted in red.
+[Web application implementation: an example](https://d6dd-211-253-164-16.ngrok-free.app/)
+- A web app. has been built to illustrate how accurately inference models can predict cancer images.
+- The number of images can be selected to randomly select the input images from the test set of the patchcamelyon dataset.
+- Models provided were VGG16, ResNet50, ResNet101, and Xception at the moment.
+- The .keras models can be compiled to .rbln models that are running on the ATOM NPUs.
+- The app provides the performance of the model in terms of accuracy, precision, recall, and f1-score.  In addition, throughput related values are also provided. 
+- The output window provides the whole test images with the inference results. If the test image was incorrectly predicted, the index in the figure was highlighted in red.
 ![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/c44dcc69-e3de-427a-a1fb-d23faae2d9ca)
+- The above app is provided for the illustration purpose only. The current version may be slightly different to the one introduced in this section.
 
 ## Pilot Project 2 : Food Image classification with Vision Transformers
 <br>
