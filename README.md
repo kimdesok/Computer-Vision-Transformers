@@ -1,32 +1,33 @@
-# Transformers based Whole Slide Image(WSI) Classification <br>
+# Transformers based Whole Slide Image(WSI) Classification (in revision) <br>
 ## Introduction of a proposed project
 
 ![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/71b9a546-fc3d-43d2-b422-c010d4c2abaa)
 
-*  In a previous study, a transformer-based ViT model showed 86% accuracy when training on the Food-101 dataset. In contrast, the ResNet-50 model was only 77% accurate (See below: Pilot project using Hugging face libraries and Food-101 dataset).
-*  Among the transformer-based models that can be utilized for high-resolution cancer tissue WSI analysis, ViT, DeiT, Swin, PVT, CrossViT, and T2T-ViT are suitable for the purpose of cancer tissue image classification and are expected to have significantly higher accuracy compared to ResNet-50.
-*  It is believed that CNN-based model is sensitive to local features, while the transformer-based vision model utilizes the self attention mechanism to effectively represent relatively extensive image information (local and global features).  Thus, The histological features of the two models marked by the heatmap are expected to be different.
-* Clinical information extracted or summarized through text analysis techniques of natural language processing is considered an important application of large-scale language models, as it plays a significant role in interpreting/discussing model inference results and supporting the training of pathologists.
-* Quantitative morphometric analysis of tissue images highlighted in the heatmap can be performed to statistically analyze the association with clinical information (cancer cell nuclear morphology, tissue boundaries of cancer cells, lymphocyte infiltration, microvasculature, presence of necrotic or apoptotic cells, etc).
-* We propose a development strategy aimed at more creative applications, such as designing architectures that can overcome the limitations of the low computational resources while at the same time improving the accuracy of inference models and utilizing large language models for interpretation of inference results.
+### A. CNN vs. ViT models
+*  In a previous prelim. study, a transformer-based ViT model showed 86% accuracy when training on the Food-101 dataset. In contrast, the ResNet-50 model was only 77% accurate (See below: Pilot project 2 using Hugging face libraries and Food-101 dataset).
+*  Among the transformer-based models that can be utilized for high-resolution cancer tissue WSI analysis, ViT, DeiT, Swin, PVT, CrossViT, and T2T-ViT are believed to be suitable for the purpose of cancer tissue image classification and are expected to have significantly higher accuracy compared to ResNet-50.
+*  It is believed that CNN-based model is sensitive to local features, while the transformer-based vision model utilizes the self attention mechanism to effectively represent relatively extensive image information (i.e., local and global features).  Thus, The histological features of the two models marked by the heatmap are expected to be different.
 
-## Overview:
+### B. NLP of pathology reports
+* Clinical information can be extracted or summarized through text analysis techniques of natural language processing(NLP) which is one of important applications of large-scale language models.  NLP could play a significant role in interpreting/discussing model inference results and eventually increasing the efficiency of the workflow of pathologists.
+* For example, a quantitative (morphometric) analysis of tissue images can be performed to statistically analyze the association with important clinical information (cancer cell nuclear morphology, tissue boundaries of cancer cells, lymphocyte infiltration, microvasculature, presence of mitotic, necrotic and apoptotic cells, etc) and reported to the pathologist as clinical evidence that backs up the inference results.
+
+* We have proposed a developmental plan to a national data center (AICA) aimed at training ViT models with weakly labeled WSI datasets (from TCGA projects) and test their performance in each cancer type(prostate, breast, lung, pancrea, etc) and performing high resolution image analytics to generate the NLP based pathology report that enhances the pathologist understanding of the inference results.
+
+## Overview of vision transformer:
 
 ![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/8a97f8fa-09ac-490d-ac6a-adb5c1846d6b)
 *High-level overview of the Vision Transformer (ViT) architecture* MLP: Multi-Layer Perceptron. Taken from the original paper [1] <br>
 
-The Vision Transformer (ViT) could be understood as a BERT that applied to images. To input images to the model, each image is divided into a sequence of patches (16x16 or 32x32) and linearly embedded. A [CLS] token is added to at the beginning of the sequence to that enables the classifification of images. Then, absolute position embeddings are added to provide this sequence to the Transformer encoder [See the above model diagram][1].
+The vision transformer (ViT) could be understood as a large language model, BERT applied to images. To input images to the model, a patch image, often in 224 x 224, is divided into a sequence of sub-patches (16x16 or 32x32) and linearly embedded. A [CLS] token is added to at the beginning of the sequence to that enables the classifification of images. Then, absolute position embeddings are added to provide this sequence to the Transformer encoder [See the above model diagram][1].
 
 The transformer encoder is the core component of the ViT model. It processes the sequence of image patch embeddings (which include both the linear projections of the flattened patches and their positional embeddings) through multiple layers of self-attention and feed-forward neural networks.  
 
 Multi-Head self-attention is a mechanism that allows the model to focus on different parts of the input sequence (the patch embeddings) simultaneously. It's "multi-head" because this process occurs in parallel for multiple heads, each head potentially focusing on different relationships in the data and learning to pay attention to different parts of the input. This parallel attention mechanism enables the model to capture a richer representation resulting from various types of interactions between patches, such as difference patterns or features of the input data.
 
-While multi-head mechanism refers to the parallel processing parts in the self-attention mechanism, multi-layer perceptron(MLP) is to interpret the complex representations output by the transformer encoder and make a final prediction(.
+While multi-head mechanism refers to the parallel processing parts in the self-attention mechanism, multi-layer perceptron(MLP) is to interpret the complex representations output by the transformer encoder and make a final prediction.
 
 ### Brief Discussion (which will lead to an experimental hypothesis)
-
-The simple demonstration was good enough to warrant more experimental works on the ViT model with anticipating its superior performance on histologic images (without requiring more powerful compute resources).
-
 At the moment, it seems that the ResNet-50 shows consistently lower accuracy values ranging from 0.7 to 0.8 depending on the hyperparameter settings.  This lower performance could be perhaps due to the inefficient regularization technique or its sensitivity to some difference existing between the training set and the evaluation set(not generalizing well).
 
 *Transformers* require a tokenization of data as in NLP applications and embedding of these tokens into a high dimensionial feature space so the data with semantically similar meanings tend to gather closely.  <br>
