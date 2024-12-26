@@ -64,8 +64,9 @@ Performance of Image Classsification Models
 [Web application implementation: an example](https://d6dd-211-253-164-16.ngrok-free.app/)
 - A web app. has been built to illustrate how accurately inference models can predict cancer images.
 - The number of images can be selected to randomly select the input images from the test set of the patchcamelyon dataset.
-- Models provided were VGG16, ResNet50, ResNet101, and Xception at the moment.
-- The .keras models can be compiled to .rbln models that are running on the ATOM NPUs.
+- Models provided were VGG16, ResNet50, ResNet101, Xception, etc at the moment.
+- Most .keras models were compiled successfully to .rbln models that are running on the ATOM NPUs.
+- The compilation of ViT models was failed. Those huggingface provided models should be archived with some caution.
 - The app provides the performance of the model in terms of accuracy, precision, recall, and f1-score.  In addition, throughput related values are also provided. 
 - The output window provides the whole test images with the inference results. If the test image was incorrectly predicted, the index in the figure was highlighted in red.
 ![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/c44dcc69-e3de-427a-a1fb-d23faae2d9ca)
