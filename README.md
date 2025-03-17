@@ -4,15 +4,15 @@
 ![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/71b9a546-fc3d-43d2-b422-c010d4c2abaa)
 
 ### A. CNN vs. ViT models
-*  In a previous prelim. study, a transformer-based ViT model showed 86% accuracy when training on the Food-101 dataset. In contrast, the ResNet-50 model was only 77% accurate (See below: Pilot project 2 using Hugging face libraries and Food-101 dataset).
+*  In a prelim. study, a transformer-based ViT model showed 86% accuracy when training on the Food-101 dataset. In contrast, the ResNet-50 model was only 77% accurate (See below: Pilot project 2 using Hugging face libraries and Food-101 dataset).
 *  Among the transformer-based models that can be utilized for high-resolution cancer tissue WSI analysis, ViT, DeiT, Swin, PVT, CrossViT, and T2T-ViT are believed to be suitable for the purpose of cancer tissue image classification and are expected to have significantly higher accuracy compared to ResNet-50.
 *  It is believed that CNN-based model is sensitive to local features, while the transformer-based vision model utilizes the self attention mechanism to effectively represent relatively extensive image information (i.e., local and global features).  Thus, The histological features of the two models marked by the heatmap are expected to be different.
 
 ### B. NLP of pathology reports
 * Clinical information can be extracted or summarized through text analysis techniques of natural language processing(NLP) which is one of important applications of large-scale language models.  NLP could play a significant role in interpreting/discussing model inference results and eventually increasing the efficiency of the workflow of pathologists.
-* For example, a quantitative (morphometric) analysis of tissue images can be performed to statistically analyze the association with important clinical information (cancer cell nuclear morphology, tissue boundaries of cancer cells, lymphocyte infiltration, microvasculature, presence of mitotic, necrotic and apoptotic cells, etc) and reported to the pathologist as clinical evidence that backs up the inference results.
+* For example, a quantitative (morphometric) analysis of tissue images can be performed to statistically analyze the association with important clinical information (cancer cell nuclear morphology, tissue boundaries of cancer cells, lymphocyte infiltration, microvasculature, presence of mitotic, necrotic and apoptotic cells, etc) and reported to the pathologist as clinical evidence that supports the inference results.
 
-* We have proposed a developmental plan to a national data center (AICA) aimed at training ViT models with weakly labeled WSI datasets (from TCGA projects) and test their performance in each cancer type(prostate, breast, lung, pancrea, etc) and performing high resolution image analytics to generate the NLP based pathology report that enhances the pathologist understanding of the inference results.
+* We have proposed a developmental plan to a national data center (AICA) aimed at training ViT models with weakly labeled WSI datasets (available from TCGA projects) and test their performance in each cancer type(prostate, breast, lung, pancrea, etc). In addiion, we are performing high resolution image analytics to generate the NLP based pathology report that enhances the pathologist's understanding of the inference results.
 
 ## Overview of vision transformer:
 
@@ -46,10 +46,10 @@ CNN based models are designed to be good at computing important local features t
 Transformer based models appear to be somewhat different to CNN based ones from this perspective.  In NLP, self-attention is a mechanism that allows each word in a sentence to consider all other words in the same sentence. In computer vision tasks, this self-attention mechanism allows a patch to directly interact with every other patch in the image, regardless of their spatial distance. Thus, this ability to learn the inter-relationship between distant patches could be uniquely beneficial to get a big picture in histologic images often highly complicated in their structures (often disrupted in malignant cases) and also mixed with many different types of cells.  
 (will be continued...)
 
-## Pilot Project 1 : Classification of Breast Cancer Histologic Images using Vision Transformers
+## Pilot Project 1 : Classification of Metastatic Breast Cancer Histologic Images
 
-As a baseline model, a ResNet-50 model, "microsoft/resnet-50",  was used in the same manner of the pilot project #1. 
-Histologic image datasets were available at Huggingface's Datasets titled as ['laurent/PatchCamelyon'](https://huggingface.co/datasets/1aurent/PatchCamelyon) It consists of 327,680 RGB color images with the size of 96x96 depicting the lymph node sections of locally metastasized breast cancers. Patch images were labeled as positive if the metastatic cells were found in the 32x32 square located in the center of the patch(See the figure below. The positive patch was highlighted in cyan in the center square).  Otherwise, they were labeled as negative.
+As a baseline model, a ResNet-50 model available as "microsoft/resnet-50" at Huggingface,  was trained in a fine tuning manner. 
+The training dataset is available at Huggingface's Datasets titled as ['laurent/PatchCamelyon'](https://huggingface.co/datasets/1aurent/PatchCamelyon) It consists of 327,680 RGB color images with the size of 96x96 depicting the lymph node sections of locally metastasized breast cancers. Patch images were labeled as positive if the metastatic cells were found in the 32x32 square located in the center of the patch(See the figure below. The positive patch was highlighted in cyan in the center square).  Otherwise, they were labeled as negative.
 
 PatchCamelyon images
 ![Image](https://github.com/basveeling/pcam/raw/master/pcam.jpg)
