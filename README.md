@@ -114,19 +114,25 @@ Upon fine tuning the pretrained models with the PatchCamelyon dataset, it appear
 Performance of Image Classsification Models											
 ![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/7e9b5fa2-c3f0-435e-ad15-b9ad8dc658b5)
 
-[Web application implementation]<br>
-[Current Website:](https://area-organic-expansion-thriller.trycloudflare.com/) note: It may not load models listed below depending on the stage of the project.
-- A web app. has been built to illustrate how accurately inference models can predict cancer images.
-- The number of images can be selected to randomly select the input images from the test set of the patchcamelyon dataset.
-- Models provided were VGG16, ResNet50, ResNet101, Xception, etc at the moment.
-- Most .keras models were compiled successfully to .rbln models that are running on the ATOM NPUs.
-- The compilation of ViT models was failed. Those huggingface provided models should be archived with some caution.
-- The app provides the performance of the model in terms of accuracy, precision, recall, and f1-score.  In addition, throughput related values are also provided. 
-- The output window provides the whole test images with the inference results. If the test image was incorrectly predicted, the index in the figure was highlighted in red.
-![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/c44dcc69-e3de-427a-a1fb-d23faae2d9ca)
-- The above app is provided for the illustration purpose only. The current version may be slightly different to the one introduced in this section.
+### Prototype Web Application (Illustration Only)
 
-### From Pilots to Proposed Work
+Available [here](https://area-organic-expansion-thriller.trycloudflare.com/)
+
+To demonstrate deployment feasibility, we implemented a **prototype web application** that runs inference on the PatchCamelyon dataset. This tool was designed to test NPU compilation and performance benchmarking, rather than to serve as a finished clinical product.  
+
+- **Models available:** VGG16, VGG19, ResNet50, ResNet101, Xception, EfficientNetB0, etc. Approx. 20 or so TF Keras models  (compiled to `.rbln` format for ATOM NPUs).  
+- **Limitations:** Hugging Face transformer-based ViT models failed compilation; these require further optimization before deployment.  
+- **Features:**  
+  - Random selection of test images for inference.  
+  - Model performance metrics: accuracy, precision, recall, F1-score, and throughput.  
+  - Visualization: test images are displayed with predictions; misclassified samples are highlighted in red.  
+
+**Important Note:** This app is provided for **illustration purposes only**. It is a prototype benchmarking tool for NPU evaluation, not the final multimodal framework proposed in this project. The full R&D work will extend beyond this prototype to integrate WSI classification and NLP-driven pathology report generation.
+
+![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/c44dcc69-e3de-427a-a1fb-d23faae2d9ca)
+
+
+## From Pilots to Proposed Work
 Pilot Projects 1 and 2 serve as **proof-of-concept exercises**: they demonstrate our ability to train and evaluate both CNN and transformer models, implement preprocessing pipelines, and deploy inference systems on NPUs. However, they should not be interpreted as the primary contribution of this proposal.  
 
 The **core R&D effort** will focus on developing a multimodal pipeline that:  
@@ -135,30 +141,27 @@ The **core R&D effort** will focus on developing a multimodal pipeline that:
 
 Thus, the pilots establish readiness, while the proposed work aims at delivering the integrated framework during the project period.
 
-### Technical Background (Supporting Detail)
-The transformer encoder is the core component of the ViT model. It processes the sequence of image patch embeddings (which include both the linear projections of the flattened patches and their positional embeddings) through multiple layers of self-attention and feed-forward neural networks.  
+## Technical Background (Supporting Detail)
 
-Multi-Head self-attention is a mechanism that allows the model to focus on different parts of the input sequence (the patch embeddings) simultaneously. It's "multi-head" because this process occurs in parallel for multiple heads, each head potentially focusing on different relationships in the data and learning to pay attention to different parts of the input. This parallel attention mechanism enables the model to capture a richer representation resulting from various types of interactions between patches, such as difference patterns or features of the input data.
+### Transformer Encoder
+The transformer encoder is the core of ViT. It processes image patch embeddings—linear projections of flattened patches plus positional embeddings—through multiple layers of self-attention and feed-forward networks.  
 
-While multi-head mechanism refers to the parallel processing parts in the self-attention mechanism, multi-layer perceptron(MLP) is to interpret the complex representations output by the transformer encoder and make a final prediction.
+### Multi-Head Self-Attention (MHSA)
+MHSA allows each patch to attend to all others, capturing long-range dependencies. Multiple heads operate in parallel, each focusing on different relationships, producing richer feature representations.  
 
-At the moment, it seems that the ResNet-50 shows consistently lower accuracy values ranging from 0.7 to 0.8 depending on the hyperparameter settings.  This lower performance could be perhaps due to the inefficient regularization technique or its sensitivity to some difference existing between the training set and the evaluation set(not generalizing well).
+### Multi-Layer Perceptron (MLP)
+Outputs of the attention layers are passed through MLP blocks, which refine the representations and support the final classification.  
 
-*Transformers* require a tokenization of data as in NLP applications and embedding of these tokens into a high dimensionial feature space so the data with semantically similar meanings tend to gather closely.  <br>
-This eventually lets it to predict the next word of a given sentence (upon training with a massive amount of text data). 
+### Tokenization and Embeddings
+Like NLP transformers, ViTs tokenize data into sequences: images are divided into 16×16 or 32×32 patches. Each patch is projected into a high-dimensional feature space where semantically relevant patches cluster, even if not visually similar. Positional encodings are added to preserve spatial context.  
 
-In computer vision application of transformers, similarily, an image is divided ('tokenized') into small patches with the size 16x16 or 32x32 and these patches are projected('embedded') into a high dimensional feature space that represents how relevant those patches are for the task the model is trained on, such as image classification.  For example, two patches might be placed closer in the feature space because they share features critical for distinguishing between classes in the dataset.  Mind that the closeness in the projected space of patches does not necessarily mean visual similarity in the conventional sense. 
+### CNN vs. Transformer Perspectives
+- **CNNs:** Strong at extracting local features (edges, textures, nuclei), pooling them hierarchically to build context. They are efficient but limited in modeling distant interactions.  
+- **ViTs:** Capture both local and global relationships directly via self-attention, enabling modeling of complex tissue architecture, disrupted structures, and heterogeneous cell populations common in malignancies.  
 
-In both NLP and computer vision transformers, positional encodings are added to the embeddings to provide positional context of each token (word or patch) in the sequence. For images, this means conveying the spatial location of each patch, as the transformer architecture does not inherently capture the order of input.
+### Implications for Histopathology
+Histologic images are visually complex and often ambiguous. Expert pathologists selectively focus on regions of interest and infer meaning from their interrelationships. ViTs, by design, mirror this capability better than CNNs, as they integrate distant contextual signals into a global representation—an essential advantage for cancer image classification.
 
-In summary, word embeddings focus on semantic and syntactic relationships, while patch projections in vision transformers are more about encoding a wide range of visual features relevant to the task at hand.
-
-*Histologic images* are complex and appear similar to the eyes of non-experts.  What distinguishes experts from laymen could be how they selectively choose where to look (focus) and extract anatomical features (compute) from the selected fields.  
-
-CNN based models are designed to be good at computing important local features that are pooled through their multiscale convolutions to capture wider context.  Although this architecture mimics the increasing receptive fields, CNNs are inherently emphasizing local interactions between edges or blobs in understanding the image.  Thus, they are believed to be somewhat limited in preferentially selecting the fields of interest and more importantly interpreting the connections of these important fields to come up with a global understanding of the image.
-
-Transformer based models appear to be somewhat different to CNN based ones from this perspective.  In NLP, self-attention is a mechanism that allows each word in a sentence to consider all other words in the same sentence. In computer vision tasks, this self-attention mechanism allows a patch to directly interact with every other patch in the image, regardless of their spatial distance. Thus, this ability to learn the inter-relationship between distant patches could be uniquely beneficial to get a big picture in histologic images often highly complicated in their structures (often disrupted in malignant cases) and also mixed with many different types of cells.  
-(will be continued...)
 ### References:
 1) An image is worth 16 x 16 images: Transformers for image recognition at scale. https://arxiv.org/pdf/2010.11929.pdf
 2) ### Open source codes:
