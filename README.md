@@ -115,7 +115,7 @@ Performance of Image Classsification Models
 ![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/7e9b5fa2-c3f0-435e-ad15-b9ad8dc658b5)
 
 [Web application implementation]<br>
-[Current Website:](https://c693-114-110-129-200.ngrok-free.app/) note: It may not load models listed below depending on the stage of the project.
+[Current Website:](https://area-organic-expansion-thriller.trycloudflare.com/) note: It may not load models listed below depending on the stage of the project.
 - A web app. has been built to illustrate how accurately inference models can predict cancer images.
 - The number of images can be selected to randomly select the input images from the test set of the patchcamelyon dataset.
 - Models provided were VGG16, ResNet50, ResNet101, Xception, etc at the moment.
