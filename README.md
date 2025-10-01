@@ -1,52 +1,105 @@
-# Transformers based Whole Slide Image(WSI) Classification (in revision) <br>
-## Introduction of a proposed project
+## Multimodal AI for Pathology: Vision and Language Models (in revision) <br>
 
-![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/71b9a546-fc3d-43d2-b422-c010d4c2abaa)
+![Workflow of weakly supervised WSI classification and analysis](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/71b9a546-fc3d-43d2-b422-c010d4c2abaa) <br>
 
-### A. CNN vs. ViT models
-*  In a prelim. study, a transformer-based ViT model showed 86% accuracy when training on the Food-101 dataset. In contrast, the ResNet-50 model was only 77% accurate (See below: Pilot project 2 using Hugging face libraries and Food-101 dataset).
-*  Among the transformer-based models that can be utilized for high-resolution cancer tissue WSI analysis, ViT, DeiT, Swin, PVT, CrossViT, and T2T-ViT are believed to be suitable for the purpose of cancer tissue image classification and are expected to have significantly higher accuracy compared to ResNet-50.
-*  It is believed that CNN-based model is sensitive to local features, while the transformer-based vision model utilizes the self attention mechanism to effectively represent relatively extensive image information (i.e., local and global features).  Thus, The histological features of the two models marked by the heatmap are expected to be different.
+**Figure 1.** Proposed multimodal pathology framework.  High-resolution WSIs are processed through transformer-based models (ViT and related architectures) to capture global and local histological features. Model outputs are visualized as heatmaps and quantitative morphometric analyses, which are then paired with NLP-driven processing of pathology reports. This integration bridges image-derived evidence with clinical text, enhancing interpretability, supporting pathologists’ decision-making, and improving workflow efficiency.
 
-### B. NLP of pathology reports
-* Clinical information can be extracted or summarized through text analysis techniques of natural language processing(NLP) which is one of important applications of large-scale language models.  NLP could play a significant role in interpreting/discussing model inference results and eventually increasing the efficiency of the workflow of pathologists.
-* For example, a quantitative (morphometric) analysis of tissue images can be performed to statistically analyze the association with important clinical information (cancer cell nuclear morphology, tissue boundaries of cancer cells, lymphocyte infiltration, microvasculature, presence of mitotic, necrotic and apoptotic cells, etc) and reported to the pathologist as clinical evidence that supports the inference results.
 
-* We have proposed a developmental plan to a national data center (AICA) aimed at training ViT models with weakly labeled WSI datasets (available from TCGA projects) and test their performance in each cancer type(prostate, breast, lung, pancrea, etc). In addiion, we are performing high resolution image analytics to generate the NLP based pathology report that enhances the pathologist's understanding of the inference results.
+### A. CNN vs. ViT Models
+
+* Convolutional neural networks (CNNs) primarily capture **local patterns**, while transformer-based vision models (ViTs) leverage **self-attention** to integrate **global context** across the entire image. As a result, the heatmaps derived from these models often highlight different histological features.
+* Within the transformer family, models such as ViT, DeiT, Swin, PVT, CrossViT, and T2T-ViT provide complementary architectural advantages (e.g., hierarchical structure, efficient training, cross-scale representation) and are considered strong candidates for cancer tissue image classification tasks.
+* Preliminary benchmarking supports this: a ViT model trained on the Food-101 dataset achieved **86% accuracy**, compared to **77% with ResNet-50** (see [Pilot Project 1](#pilot-project-1--food-image-classification-with-vision-transformers)). This aligns with reported gains in other domains where transformers outperform end-to-end CNNs.
+
+
+### B. NLP of Pathology Reports  
+
+While transformer-based vision models provide powerful tools for analyzing histological images, the full clinical utility emerges when these **image-derived insights are integrated with clinical text**. Pathology reports contain rich diagnostic context, and natural language processing (NLP) enables structured extraction and summarization of this information.  
+
+NLP techniques, particularly those enabled by large-scale language models, can play a significant role in:  
+- Interpreting and discussing model inference results,  
+- Associating quantitative image features (e.g., nuclear morphology, tissue boundaries, lymphocyte infiltration, microvasculature, presence of mitotic, necrotic, and apoptotic cells) with patient-level outcomes,  
+- Reporting these findings in a format that directly supports the pathologist’s decision-making workflow.  
+
+This combined approach forms the basis of our proposed framework (see figure above): weakly labeled high-resolution WSI datasets (e.g., TCGA projects) are used to train ViT models for cancer-type classification, while NLP modules generate pathology report summaries that contextualize the image-based inferences. Together, these components enhance interpretability, strengthen clinical evidence, and ultimately improve workflow efficiency in pathology practice. 
 
 ## Overview of vision transformer:
 
 ![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/8a97f8fa-09ac-490d-ac6a-adb5c1846d6b)
-*High-level overview of the Vision Transformer (ViT) architecture* MLP: Multi-Layer Perceptron. Taken from the original paper [1] <br>
+**Figure 2.** High-level overview of the Vision Transformer (ViT) architecture* MLP: Multi-Layer Perceptron. Taken from the original paper [1] <br>
 
-The vision transformer (ViT) could be understood as a large language model, BERT applied to images. To input images to the model, a patch image, often in 224 x 224, is divided into a sequence of sub-patches (16x16 or 32x32) and linearly embedded. A [CLS] token is added to at the beginning of the sequence to that enables the classifification of images. Then, absolute position embeddings are added to provide this sequence to the Transformer encoder [See the above model diagram][1].
+The vision transformer (ViT) can be understood as the **BERT of images**. Instead of processing words, ViT splits an image (e.g., 224×224) into a sequence of small patches (16×16 or 32×32), projects each into an embedding space, and adds a special [CLS] token for classification. Absolute position embeddings encode spatial information, and the sequence is passed into a Transformer encoder.  
 
-The transformer encoder is the core component of the ViT model. It processes the sequence of image patch embeddings (which include both the linear projections of the flattened patches and their positional embeddings) through multiple layers of self-attention and feed-forward neural networks.  
+Key mechanisms:  
+- **Multi-Head Self-Attention (MHSA):** lets each patch attend to every other patch, capturing long-range dependencies and global context.  
+- **Feed-Forward Networks (MLP):** interpret and combine these representations for the final prediction.  
 
-Multi-Head self-attention is a mechanism that allows the model to focus on different parts of the input sequence (the patch embeddings) simultaneously. It's "multi-head" because this process occurs in parallel for multiple heads, each head potentially focusing on different relationships in the data and learning to pay attention to different parts of the input. This parallel attention mechanism enables the model to capture a richer representation resulting from various types of interactions between patches, such as difference patterns or features of the input data.
+By contrast, **CNNs** rely on progressively larger receptive fields from local convolutions, making them excellent at extracting edges, textures, and localized features, but less effective at capturing global relational structures.  
 
-While multi-head mechanism refers to the parallel processing parts in the self-attention mechanism, multi-layer perceptron(MLP) is to interpret the complex representations output by the transformer encoder and make a final prediction.
+In histopathology, this distinction matters:  
+- CNNs emphasize **local interactions** (edges, nuclei, blobs).  
+- ViTs emphasize **global structure**, modeling interconnections between distant patches (e.g., stromal-tumor interactions, immune infiltration patterns).  
 
-### Brief Discussion (which will lead to an experimental hypothesis)
-At the moment, it seems that the ResNet-50 shows consistently lower accuracy values ranging from 0.7 to 0.8 depending on the hyperparameter settings.  This lower performance could be perhaps due to the inefficient regularization technique or its sensitivity to some difference existing between the training set and the evaluation set(not generalizing well).
+Thus, ViTs are particularly suited for **complex WSI structures**, where malignant tissues often disrupt normal architecture.  
 
-*Transformers* require a tokenization of data as in NLP applications and embedding of these tokens into a high dimensionial feature space so the data with semantically similar meanings tend to gather closely.  <br>
-This eventually lets it to predict the next word of a given sentence (upon training with a massive amount of text data). 
+---
 
-In computer vision application of transformers, similarily, an image is divided ('tokenized') into small patches with the size 16x16 or 32x32 and these patches are projected('embedded') into a high dimensional feature space that represents how relevant those patches are for the task the model is trained on, such as image classification.  For example, two patches might be placed closer in the feature space because they share features critical for distinguishing between classes in the dataset.  Mind that the closeness in the projected space of patches does not necessarily mean visual similarity in the conventional sense. 
+### Summary Table: CNN vs. ViT vs. NLP in Pathology
 
-In both NLP and computer vision transformers, positional encodings are added to the embeddings to provide positional context of each token (word or patch) in the sequence. For images, this means conveying the spatial location of each patch, as the transformer architecture does not inherently capture the order of input.
+| Component | Core Strength | Limitation | Role in Proposed Framework |
+|-----------|--------------|------------|----------------------------|
+| **CNN (ResNet, etc.)** | Strong at capturing local features (edges, nuclei, textures) | Limited global context, may underperform on complex tissue patterns | Baseline model, benchmark for patch-level accuracy |
+| **ViT & Variants** | Self-attention integrates global + local features; scalable; interpretable heatmaps | Data-hungry, sensitive to weak supervision | Primary engine for WSI classification |
+| **NLP (Pathology Reports)** | Extracts and structures clinical context; bridges human-readable insights | Requires domain-specific adaptation | Summarizes inference results and supports workflow efficiency |
 
-In summary, word embeddings focus on semantic and syntactic relationships, while patch projections in vision transformers are more about encoding a wide range of visual features relevant to the task at hand.
+---
 
-*Histologic images* are complex and appear similar to the eyes of non-experts.  What distinguishes experts from laymen could be how they selectively choose where to look (focus) and extract anatomical features (compute) from the selected fields.  
+### Brief Discussion → Experimental Hypothesis
+ResNet-50 consistently shows lower accuracy (~0.70–0.80) compared to ViTs, likely due to weaker regularization and reduced generalization across datasets. We hypothesize that **ViT models trained on weakly labeled WSI datasets (TCGA)** will outperform CNN baselines in classification, and when coupled with NLP-generated clinical reporting, will yield a robust multimodal framework for pathology. [See the above model diagram][1].
 
-CNN based models are designed to be good at computing important local features that are pooled through their multiscale convolutions to capture wider context.  Although this architecture mimics the increasing receptive fields, CNNs are inherently emphasizing local interactions between edges or blobs in understanding the image.  Thus, they are believed to be somewhat limited in preferentially selecting the fields of interest and more importantly interpreting the connections of these important fields to come up with a global understanding of the image.
+---
+### Note on Pilot Projects
+Pilot Projects 1 and 2 are **preliminary studies** designed to demonstrate technical readiness, validate our workflows (data preprocessing, training, evaluation), and build familiarity with transformer-based models in both vision and language domains. These pilots should not be regarded as the main body of the proposed work.  
 
-Transformer based models appear to be somewhat different to CNN based ones from this perspective.  In NLP, self-attention is a mechanism that allows each word in a sentence to consider all other words in the same sentence. In computer vision tasks, this self-attention mechanism allows a patch to directly interact with every other patch in the image, regardless of their spatial distance. Thus, this ability to learn the inter-relationship between distant patches could be uniquely beneficial to get a big picture in histologic images often highly complicated in their structures (often disrupted in malignant cases) and also mixed with many different types of cells.  
-(will be continued...)
+The central focus of this proposal is the **development of a multimodal framework** that combines:  
+1. Vision Transformer (ViT)–based classification of weakly labeled WSI datasets (e.g., TCGA), and  
+2. NLP-driven generation of pathology report summaries.  
 
-## Pilot Project 1 : Classification of Metastatic Breast Cancer Histologic Images
+The pilot projects serve as a foundation, showing feasibility and our ability to execute, but the main R&D effort will be dedicated to delivering this integrated multimodal pipeline during the project period.
+
+## Pilot Project 1: Food Image Classification with Vision Transformers
+<br>
+As a **preliminary feasibility study**, we evaluated a transformer-based model (ViT) against a CNN baseline (ResNet-50) on the Food-101 dataset. The goal of this pilot was not to achieve state-of-the-art performance in food recognition, but rather to test our workflow for fine-tuning Hugging Face models, assess training efficiency, and establish a baseline comparison between transformer and CNN architectures.
+
+**Summary of Pilot Project 1 (Food-101):**
+
+| Aspect                | Details                                                                 |
+|------------------------|-------------------------------------------------------------------------|
+| **Dataset**           | Food-101 (101 categories, Hugging Face repository)                      |
+| **Models compared**   | ViT (google/vit-base-patch16-224-in21k) vs. ResNet-50 (microsoft/resnet-50) |
+| **Training setup**    | Fine-tuning pretrained models with identical preprocessing (augmentation, TF conversion) |
+| **Accuracy**          | ViT: **86.2%** vs. ResNet-50: **76.7%**                                 |
+| **Training time**     | ViT: **15.6 hrs** vs. ResNet-50: **30.9 hrs**                           |
+| **Observations**      | ViT converged faster, achieved higher accuracy; ResNet showed signs of overfitting and would benefit from hyperparameter tuning. |
+
+Here are some preliminary results of inference: <br>
+![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/81f7622e-0fc0-413a-8751-064750942445)
+
+![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/d2044dde-4632-40dd-94be-2159bdefe1c5)
+
+## Pilot Project 2: Classification of Metastatic Breast Cancer Histologic Images
+As a **second exploratory study**, we fine-tuned ViT and ResNet-50 models on the PatchCamelyon dataset. The purpose of this pilot was to extend our evaluation of CNNs vs. transformers into the domain of histopathology images. While the results are preliminary (limited epochs and constrained hyperparameter tuning), they highlight dataset-dependent performance patterns and reinforce the need for our proposed multimodal framework that integrates WSI classification with pathology report analysis.
+
+**Summary of Pilot Project 2 (PatchCamelyon):**
+
+| Aspect                | Details                                                                 |
+|------------------------|-------------------------------------------------------------------------|
+| **Dataset**           | PatchCamelyon (327,680 RGB images, 96×96 patches, Hugging Face: laurent/PatchCamelyon) |
+| **Labeling**          | Positive if metastatic cells found in central 32×32 patch; otherwise negative |
+| **Models compared**   | ViT vs. ResNet-50 (both Hugging Face pretrained models)                  |
+| **Training setup**    | Fine-tuning for 5 epochs, batch sizes up to 64                           |
+| **Preliminary results** | ViT slightly outperformed ResNet at larger batch sizes (≥64), but ResNet was stronger at batch size 32 |
+| **Observations**      | Transformer advantage not guaranteed; performance may depend on dataset and optimization settings. Confirms need for extended experiments in WSIs. |
 
 As a baseline model, a ResNet-50 model available as "microsoft/resnet-50" at Huggingface,  was trained in a fine tuning manner. 
 The training dataset is available at Huggingface's Datasets titled as ['laurent/PatchCamelyon'](https://huggingface.co/datasets/1aurent/PatchCamelyon) It consists of 327,680 RGB color images with the size of 96x96 depicting the lymph node sections of locally metastasized breast cancers. Patch images were labeled as positive if the metastatic cells were found in the 32x32 square located in the center of the patch(See the figure below. The positive patch was highlighted in cyan in the center square).  Otherwise, they were labeled as negative.
@@ -73,32 +126,39 @@ Performance of Image Classsification Models
 ![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/c44dcc69-e3de-427a-a1fb-d23faae2d9ca)
 - The above app is provided for the illustration purpose only. The current version may be slightly different to the one introduced in this section.
 
-## Pilot Project 2 : Food Image classification with Vision Transformers
-<br>
+### From Pilots to Proposed Work
+Pilot Projects 1 and 2 serve as **proof-of-concept exercises**: they demonstrate our ability to train and evaluate both CNN and transformer models, implement preprocessing pipelines, and deploy inference systems on NPUs. However, they should not be interpreted as the primary contribution of this proposal.  
 
-### Methods and Materials
+The **core R&D effort** will focus on developing a multimodal pipeline that:  
+1. Trains ViT-based models on weakly labeled WSI datasets (e.g., TCGA), and  
+2. Integrates these results with NLP-driven pathology report generation to provide clinically interpretable outputs.  
 
-To investigate the advantages of Transformer based deep learning models for computer vision tasks, a ViT model "google/vit-base-patch16-224-in21k" selected from Huggingface's model repository.  The Python script has been basically adopted from the list of open source codes[2] and is still under development.  The first source code loads a dataset called 'food-101' available at Huggingface's dataset repository. 
+Thus, the pilots establish readiness, while the proposed work aims at delivering the integrated framework during the project period.
 
-As a baseline model, a ResNet-50 model, "microsoft/resnet-50",  was used, also available at Huggingface's model repository.  
+### Technical Background (Supporting Detail)
+The transformer encoder is the core component of the ViT model. It processes the sequence of image patch embeddings (which include both the linear projections of the flattened patches and their positional embeddings) through multiple layers of self-attention and feed-forward neural networks.  
 
-### Preliminary Results
+Multi-Head self-attention is a mechanism that allows the model to focus on different parts of the input sequence (the patch embeddings) simultaneously. It's "multi-head" because this process occurs in parallel for multiple heads, each head potentially focusing on different relationships in the data and learning to pay attention to different parts of the input. This parallel attention mechanism enables the model to capture a richer representation resulting from various types of interactions between patches, such as difference patterns or features of the input data.
 
-Upon fine tuning the pretrained models with the food-101 dataset, it showed that the ViT model should be superior to a CNN based model such as ResNet-50.  The ViT model seemed better in accuracy and loss and converged faster than the Resnet-50: 86.2% vs. 76.7% in accuracy and 15.6 hrs vs. 30.9 hrs taken for the training.  (See the table below):
+While multi-head mechanism refers to the parallel processing parts in the self-attention mechanism, multi-layer perceptron(MLP) is to interpret the complex representations output by the transformer encoder and make a final prediction.
 
-![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/ab5fdbac-0f49-4b10-a6b4-ee42a51b57b6)
+At the moment, it seems that the ResNet-50 shows consistently lower accuracy values ranging from 0.7 to 0.8 depending on the hyperparameter settings.  This lower performance could be perhaps due to the inefficient regularization technique or its sensitivity to some difference existing between the training set and the evaluation set(not generalizing well).
 
-The above results were obtained with the same preprocessing such as data augmentation, converting the data to a tensorflow format, etc.  
-At the moment, each model should be further tuned with adjusting hyperparameters and trying for different optimizers, especially for the ResNet-50 model since it seemed overfitted (The accuracy of the SOTA ResNet-50 reached about 90% as top 1 accuracy).
+*Transformers* require a tokenization of data as in NLP applications and embedding of these tokens into a high dimensionial feature space so the data with semantically similar meanings tend to gather closely.  <br>
+This eventually lets it to predict the next word of a given sentence (upon training with a massive amount of text data). 
 
-![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/c38bd6bc-28fc-4e20-997e-0dde8019932f)
+In computer vision application of transformers, similarily, an image is divided ('tokenized') into small patches with the size 16x16 or 32x32 and these patches are projected('embedded') into a high dimensional feature space that represents how relevant those patches are for the task the model is trained on, such as image classification.  For example, two patches might be placed closer in the feature space because they share features critical for distinguishing between classes in the dataset.  Mind that the closeness in the projected space of patches does not necessarily mean visual similarity in the conventional sense. 
 
-![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/8d5d8c66-d369-4ade-96dd-c183d5c73cbc)
+In both NLP and computer vision transformers, positional encodings are added to the embeddings to provide positional context of each token (word or patch) in the sequence. For images, this means conveying the spatial location of each patch, as the transformer architecture does not inherently capture the order of input.
 
-Here are some preliminary results of inference: <br>
-![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/81f7622e-0fc0-413a-8751-064750942445)
+In summary, word embeddings focus on semantic and syntactic relationships, while patch projections in vision transformers are more about encoding a wide range of visual features relevant to the task at hand.
 
-![image](https://github.com/kimdesok/Computer-Vision-Transformers/assets/64822593/d2044dde-4632-40dd-94be-2159bdefe1c5)
+*Histologic images* are complex and appear similar to the eyes of non-experts.  What distinguishes experts from laymen could be how they selectively choose where to look (focus) and extract anatomical features (compute) from the selected fields.  
+
+CNN based models are designed to be good at computing important local features that are pooled through their multiscale convolutions to capture wider context.  Although this architecture mimics the increasing receptive fields, CNNs are inherently emphasizing local interactions between edges or blobs in understanding the image.  Thus, they are believed to be somewhat limited in preferentially selecting the fields of interest and more importantly interpreting the connections of these important fields to come up with a global understanding of the image.
+
+Transformer based models appear to be somewhat different to CNN based ones from this perspective.  In NLP, self-attention is a mechanism that allows each word in a sentence to consider all other words in the same sentence. In computer vision tasks, this self-attention mechanism allows a patch to directly interact with every other patch in the image, regardless of their spatial distance. Thus, this ability to learn the inter-relationship between distant patches could be uniquely beneficial to get a big picture in histologic images often highly complicated in their structures (often disrupted in malignant cases) and also mixed with many different types of cells.  
+(will be continued...)
 ### References:
 1) An image is worth 16 x 16 images: Transformers for image recognition at scale. https://arxiv.org/pdf/2010.11929.pdf
 2) ### Open source codes:
