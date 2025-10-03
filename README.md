@@ -116,7 +116,10 @@ Performance of Image Classsification Models
 
 ### Prototype Web Application (Illustration Only)
 
-Available [here](https://area-organic-expansion-thriller.trycloudflare.com/)
+Currently Not Available Since Oct 2nd., 2025: 
+>* Under Reconstruction Due to Frequent Unannounced Runtime and NPU Installation Failures at Elice Group, s. Korea
+>* Will be restored ASAP [here](https://huggingface.co/docs/hub/spaces-zerogpu) at <img width="95" height="88" alt="image" src="https://github.com/user-attachments/assets/7becd335-a90a-4349-be56-a657b7d4a49c" />
+Hugging Face Spaces
 
 To demonstrate deployment feasibility, we implemented a **prototype web application** that runs inference on the PatchCamelyon dataset. This tool was designed to test NPU compilation and performance benchmarking, rather than to serve as a finished clinical product.  
 
