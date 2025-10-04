@@ -9,7 +9,7 @@
 
 * Convolutional neural networks (CNNs) primarily capture **local patterns**, while transformer-based vision models (ViTs) leverage **self-attention** to integrate **global context** across the entire image. As a result, the heatmaps derived from these models often highlight different histological features.
 * Within the transformer family, models such as ViT, DeiT, Swin, PVT, CrossViT, and T2T-ViT provide complementary architectural advantages (e.g., hierarchical structure, efficient training, cross-scale representation) and are considered strong candidates for cancer tissue image classification tasks.
-* Preliminary benchmarking supports this: a ViT model trained on the Food-101 dataset achieved **86% accuracy**, compared to **77% with ResNet-50** (see [Pilot Project 1](#pilot-project-1--food-image-classification-with-vision-transformers)). This aligns with reported gains in other domains where transformers outperform end-to-end CNNs.
+* Preliminary benchmarking supports this: a ViT model trained on the Food-101 dataset achieved **86% accuracy**, compared to **77% with ResNet-50** (see [Pilot Project 1](https://github.com/kimdesok/Computer-Vision-Transformers/blob/main/README.md#pilot-project-1-food-image-classification-with-vision-transformers)). This aligns with reported gains in other domains where transformers outperform end-to-end CNNs.
 
 
 ### B. NLP of Pathology Reports  
@@ -21,7 +21,7 @@ NLP techniques, particularly those enabled by large-scale language models, can p
 - Associating quantitative image features (e.g., nuclear morphology, tissue boundaries, lymphocyte infiltration, microvasculature, presence of mitotic, necrotic, and apoptotic cells) with patient-level outcomes,  
 - Reporting these findings in a format that directly supports the pathologist’s decision-making workflow.  
 
-This combined approach forms the basis of our proposed framework (see figure above): weakly labeled high-resolution WSI datasets (e.g., TCGA projects) are used to train ViT models for cancer-type classification, while NLP modules generate pathology report summaries that contextualize the image-based inferences. Together, these components enhance interpretability, strengthen clinical evidence, and ultimately improve workflow efficiency in pathology practice. 
+This combined approach forms the basis of our proposed framework (See Figure 1 above): weakly labeled high-resolution WSI datasets (e.g., Image datasets from TCGA projects) are used to train ViT models for cancer-type classification, while NLP modules generate pathology report summaries that contextualize the image-based inferences. Together, these components enhance interpretability, strengthen clinical evidence, and ultimately improve workflow efficiency in pathology practice. 
 
 ## Overview of vision transformer:
 
@@ -55,7 +55,7 @@ Thus, ViTs are particularly suited for **complex WSI structures**, where maligna
 ---
 
 ### Brief Discussion → Experimental Hypothesis
-ResNet-50 consistently shows lower accuracy (~0.70–0.80) compared to ViTs, likely due to weaker regularization and reduced generalization across datasets. We hypothesize that **ViT models trained on weakly labeled WSI datasets (TCGA)** will outperform CNN baselines in classification, and when coupled with NLP-generated clinical reporting, will yield a robust multimodal framework for pathology. [See the above model diagram][1].
+ResNet-50 consistently shows lower accuracy (AUC: 0.90–0.95) compared to ViTs (higher than 0.95), likely due to weaker regularization and reduced generalization across datasets. We hypothesize that **ViT models trained on weakly labeled WSI datasets (TCGA)** will outperform CNN baselines in classification, and when coupled with NLP-generated clinical reporting, will yield a robust multimodal framework for pathology.
 
 ---
 ### Note on Pilot Projects
