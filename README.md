@@ -116,9 +116,7 @@ Performance of Image Classsification Models
 
 ### Prototype Web Application (Illustration Only)
 
-Currently Not Available Since Oct 2nd., 2025: 
 >* Under construction: Click [here](https://nkjhysfhcnsramak.tunnel.elice.io/proxy/8890/)
->* Due to frequent unannounced runtime failures at Elice Group, s. Korea, it may be not available sometimes but do come back & check it out.
 
 To demonstrate deployment feasibility, we implemented a **prototype web application** that runs inference on the PatchCamelyon dataset. This tool was designed to test NPU compilation and performance benchmarking, rather than to serve as a finished clinical product.  
 
